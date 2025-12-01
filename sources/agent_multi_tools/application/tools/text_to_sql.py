@@ -1,11 +1,11 @@
 from langchain_core.tools import BaseTool
 from pydantic import BaseModel
 
+from sources.agent_multi_tools.application.chains.chain_text_to_sql import ChainTextToSQL
 from sources.agent_multi_tools.config.config_tools import LLMToolInput
-from sources.agent_multi_tools.domain.ports.chat_history_handler import ChatHistoryHandler
-from sources.agent_multi_tools.domain.ports.database_handler import DatabaseHandler
-from sources.agent_multi_tools.domain.ports.llm_handler import LLMHandler
-from sources.agent_multi_tools.domain.services.chains.chain_text_to_sql import ChainTextToSQL
+from sources.agent_multi_tools.ports.chat_history_handler import ChatHistoryHandler
+from sources.agent_multi_tools.ports.database_handler import DatabaseHandler
+from sources.agent_multi_tools.ports.llm_handler import LLMHandler
 
 
 class TextToSql(BaseTool):

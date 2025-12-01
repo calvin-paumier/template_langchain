@@ -1,11 +1,11 @@
 from langchain_core.tools import BaseTool
 from pydantic import BaseModel
 
+from sources.agent_multi_tools.application.chains.chain_weather import ChainWeather
 from sources.agent_multi_tools.config.config_tools import ApiMeteoToolInput
-from sources.agent_multi_tools.domain.ports.chat_history_handler import ChatHistoryHandler
-from sources.agent_multi_tools.domain.ports.llm_handler import LLMHandler
-from sources.agent_multi_tools.domain.ports.weather_api_handler import WeatherApiHandler
-from sources.agent_multi_tools.domain.services.chains.chain_weather import ChainWeather
+from sources.agent_multi_tools.ports.chat_history_handler import ChatHistoryHandler
+from sources.agent_multi_tools.ports.llm_handler import LLMHandler
+from sources.agent_multi_tools.ports.weather_api_handler import WeatherApiHandler
 
 
 class Weather(BaseTool):

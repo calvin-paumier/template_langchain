@@ -7,14 +7,14 @@ from langchain_core.tools import BaseTool
 from sources.agent_multi_tools.config.config_agent import ConfigAgentState
 from sources.agent_multi_tools.config.config_prompt import ConfigPrompts
 from sources.agent_multi_tools.config.config_tools import ConfigTools
-from sources.agent_multi_tools.domain.ports.chat_history_handler import ChatHistoryHandler
-from sources.agent_multi_tools.domain.ports.llm_handler import LLMHandler
-from sources.agent_multi_tools.domain.services.utils.prompt_formater import PromptFormater
+from sources.agent_multi_tools.ports.chat_history_handler import ChatHistoryHandler
+from sources.agent_multi_tools.ports.llm_handler import LLMHandler
+from sources.agent_multi_tools.utils.prompt_formater import PromptFormater
 
 
 class ToolRouter:
     def __init__(self, llm_handler: LLMHandler, chat_history_handler: ChatHistoryHandler, tools: dict[str, BaseTool]):
-        self.llm = llm_handler.get_llm().bind_tools(list(tools.values()))
+        self.llm = llm_handler.get_llm().bind_tools(list(tools.values()), tool_choice="any")
         self.chat_history_handler = chat_history_handler
         self.tools_descriptions = self._get_tool_descriptions(tools)
         self.tool_mapping = self._get_tool_mapping(tools)
@@ -56,14 +56,6 @@ class ToolRouter:
         response = routing_chain.invoke(
             {"input": question}, config={"configurable": {"session_id": config["configurable"]["session_id"]}}
         )
-
-        for _ in range(3):
-            if response.tool_calls:
-                break
-
-            response = routing_chain.invoke(
-                {"input": question}, config={"configurable": {"session_id": config["configurable"]["session_id"]}}
-            )
 
         tool_choice = self.tool_mapping.get(response.tool_calls[0].get("name"))
 

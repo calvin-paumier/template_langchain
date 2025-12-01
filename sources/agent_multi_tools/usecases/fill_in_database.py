@@ -1,7 +1,7 @@
 import pandas as pd
 
 from sources.agent_multi_tools.config.config_sql import ConfigSQL
-from sources.agent_multi_tools.domain.ports.database_handler import DatabaseHandler
+from sources.agent_multi_tools.ports.database_handler import DatabaseHandler
 
 
 def fill_in_database(database_handler: DatabaseHandler, df: pd.DataFrame, table_config: ConfigSQL) -> None:

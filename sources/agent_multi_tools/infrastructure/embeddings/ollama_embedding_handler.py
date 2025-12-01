@@ -1,6 +1,6 @@
 from langchain_ollama import OllamaEmbeddings
 
-from sources.agent_multi_tools.domain.ports.embedding_handler import EmbeddingHandler
+from sources.agent_multi_tools.ports.embedding_handler import EmbeddingHandler
 
 
 class OllamaEmbeddingHandler(EmbeddingHandler):

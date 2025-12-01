@@ -74,8 +74,8 @@ install-models:
 # Remplissage de la base de données
 fill-db:
 	@echo "$(GREEN)🗄️  Remplissage de la base de données...$(RESET)"
-	uv run python sources/agent_multi_tools/application/app_fill_in_database.py
-	uv run python sources/agent_multi_tools/application/app_fill_in_vector_db.py
+	uv run python sources/agent_multi_tools/launch/cli/app_fill_in_database.py
+	uv run python sources/agent_multi_tools/launch/cli/app_fill_in_vector_db.py
 	@echo "$(GREEN)✅ Base de données remplie !$(RESET)"
 
 # Nettoyage
@@ -99,5 +99,5 @@ lint:
 # Lancement de l'application Streamlit
 streamlit:
 	@echo "$(GREEN)🚀 Lancement de l'application Streamlit...$(RESET)"
-	uv run streamlit run sources/agent_multi_tools/application/app_streamlit.py
+	uv run streamlit run sources/agent_multi_tools/launch/web/app_streamlit.py
 	@echo "$(GREEN)✅ Application Streamlit arrêtée !$(RESET)"

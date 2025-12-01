@@ -4,8 +4,8 @@ import pandas as pd
 from langchain_postgres import PGVector
 from sqlalchemy import Engine, create_engine, text
 
-from sources.agent_multi_tools.domain.ports.database_handler import DatabaseHandler
-from sources.agent_multi_tools.domain.ports.embedding_handler import EmbeddingHandler
+from sources.agent_multi_tools.ports.database_handler import DatabaseHandler
+from sources.agent_multi_tools.ports.embedding_handler import EmbeddingHandler
 
 
 class PostgresDatabaseHandler(DatabaseHandler):

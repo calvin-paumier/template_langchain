@@ -2,9 +2,9 @@ import uuid
 
 from langchain_core.messages import HumanMessage
 
-from sources.agent_multi_tools.domain.ports.interface_handler import InterfaceHandler
-from sources.agent_multi_tools.domain.services.agent.agent_state_graph import AgentStateGraph
+from sources.agent_multi_tools.application.agent.agent_state_graph import AgentStateGraph
 from sources.agent_multi_tools.infrastructure.chat_history.in_memory_chat_history_handler import InMemoryChatHistoryHandler
+from sources.agent_multi_tools.ports.interface_handler import InterfaceHandler
 
 
 class ChatHandler(InterfaceHandler):

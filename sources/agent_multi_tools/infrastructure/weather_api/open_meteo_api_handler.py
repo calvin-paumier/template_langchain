@@ -4,7 +4,7 @@ import requests
 from geopy.geocoders import Nominatim
 
 from sources.agent_multi_tools.config.config_open_meteo import ConfigOpenMeteo
-from sources.agent_multi_tools.domain.ports.weather_api_handler import WeatherApiHandler
+from sources.agent_multi_tools.ports.weather_api_handler import WeatherApiHandler
 
 
 class OpenMeteoApiHandler(WeatherApiHandler):

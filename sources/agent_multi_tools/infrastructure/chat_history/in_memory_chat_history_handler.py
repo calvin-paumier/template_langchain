@@ -3,7 +3,7 @@ from langchain_core.chat_history import (
     InMemoryChatMessageHistory,
 )
 
-from sources.agent_multi_tools.domain.ports.chat_history_handler import ChatHistoryHandler
+from sources.agent_multi_tools.ports.chat_history_handler import ChatHistoryHandler
 
 
 class InMemoryChatHistoryHandler(ChatHistoryHandler):

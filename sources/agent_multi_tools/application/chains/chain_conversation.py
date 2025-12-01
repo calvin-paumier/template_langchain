@@ -1,9 +1,9 @@
 from langchain_core.runnables import RunnableWithMessageHistory
 
 from sources.agent_multi_tools.config.config_prompt import ConfigPrompts
-from sources.agent_multi_tools.domain.ports.chat_history_handler import ChatHistoryHandler
-from sources.agent_multi_tools.domain.ports.llm_handler import LLMHandler
-from sources.agent_multi_tools.domain.services.utils.prompt_formater import PromptFormater
+from sources.agent_multi_tools.ports.chat_history_handler import ChatHistoryHandler
+from sources.agent_multi_tools.ports.llm_handler import LLMHandler
+from sources.agent_multi_tools.utils.prompt_formater import PromptFormater
 
 
 class ChainConversation:

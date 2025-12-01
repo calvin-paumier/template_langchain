@@ -5,11 +5,11 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.prebuilt import ToolNode
 
+from sources.agent_multi_tools.application.agent.agent_state import AgentState
+from sources.agent_multi_tools.application.agent.agent_tool_router import ToolRouter
 from sources.agent_multi_tools.config.config_agent import ConfigAgent, ConfigAgentState
-from sources.agent_multi_tools.domain.ports.chat_history_handler import ChatHistoryHandler
-from sources.agent_multi_tools.domain.ports.llm_handler import LLMHandler
-from sources.agent_multi_tools.domain.services.agent.agent_state import AgentState
-from sources.agent_multi_tools.domain.services.agent.agent_tool_router import ToolRouter
+from sources.agent_multi_tools.ports.chat_history_handler import ChatHistoryHandler
+from sources.agent_multi_tools.ports.llm_handler import LLMHandler
 
 
 class AgentStateGraph:
