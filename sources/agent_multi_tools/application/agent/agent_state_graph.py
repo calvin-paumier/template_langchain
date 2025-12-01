@@ -10,17 +10,20 @@ from sources.agent_multi_tools.application.agent.agent_tool_router import ToolRo
 from sources.agent_multi_tools.config.config_agent import ConfigAgent, ConfigAgentState
 from sources.agent_multi_tools.ports.chat_history_handler import ChatHistoryHandler
 from sources.agent_multi_tools.ports.llm_handler import LLMHandler
+from sources.agent_multi_tools.ports.tool_binding_llm_handler import ToolBindingLLMHandler
 
 
 class AgentStateGraph:
     def __init__(
         self,
+        tool_binding_llm_handler: ToolBindingLLMHandler,
         llm_handler: LLMHandler,
         chat_history_handler: ChatHistoryHandler,
         tools: dict[str, Runnable[Any, Any]],
         session_id: str = "default",
     ):
         self.llm_handler = llm_handler
+        self.tool_binding_llm_handler = tool_binding_llm_handler
         self.chat_history_handler = chat_history_handler
         self.tools = tools
         self.session_id = session_id
@@ -31,7 +34,7 @@ class AgentStateGraph:
         # Router
         workflow.add_node(
             ConfigAgent.NODE_ROUTER_AGENT,
-            ToolRouter(self.llm_handler, self.chat_history_handler, self.tools).route_to_tool,
+            ToolRouter(self.tool_binding_llm_handler, self.chat_history_handler, self.tools).route_to_tool,
         )
         workflow.add_edge(START, ConfigAgent.NODE_ROUTER_AGENT)
 

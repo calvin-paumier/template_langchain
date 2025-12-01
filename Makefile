@@ -63,6 +63,10 @@ install-models:
 	(docker exec $$(docker-compose ps -q ollama) ollama pull $$OLLAMA_MODEL 2>/dev/null || \
 	 ollama pull $$OLLAMA_MODEL 2>/dev/null || \
 	 echo "$(RED)⚠️  Impossible d'installer $$OLLAMA_MODEL$(RESET)") && \
+	echo "$(GREEN)📦 Installation du modèle tool binding : $$OLLAMA_TOOL_BINDING_MODEL$(RESET)" && \
+	(docker exec $$(docker-compose ps -q ollama) ollama pull $$OLLAMA_TOOL_BINDING_MODEL 2>/dev/null || \
+	 ollama pull $$OLLAMA_TOOL_BINDING_MODEL 2>/dev/null || \
+	 echo "$(RED)⚠️  Impossible d'installer $$OLLAMA_TOOL_BINDING_MODEL$(RESET)") && \
 	echo "$(GREEN)📦 Installation du modèle d'embedding : $$OLLAMA_EMBEDDING_MODEL$(RESET)" && \
 	(docker exec $$(docker-compose ps -q ollama) ollama pull $$OLLAMA_EMBEDDING_MODEL 2>/dev/null || \
 	 ollama pull $$OLLAMA_EMBEDDING_MODEL 2>/dev/null || \

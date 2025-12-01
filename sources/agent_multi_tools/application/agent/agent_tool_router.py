@@ -8,13 +8,13 @@ from sources.agent_multi_tools.config.config_agent import ConfigAgentState
 from sources.agent_multi_tools.config.config_prompt import ConfigPrompts
 from sources.agent_multi_tools.config.config_tools import ConfigTools
 from sources.agent_multi_tools.ports.chat_history_handler import ChatHistoryHandler
-from sources.agent_multi_tools.ports.llm_handler import LLMHandler
+from sources.agent_multi_tools.ports.tool_binding_llm_handler import ToolBindingLLMHandler
 from sources.agent_multi_tools.utils.prompt_formater import PromptFormater
 
 
 class ToolRouter:
-    def __init__(self, llm_handler: LLMHandler, chat_history_handler: ChatHistoryHandler, tools: dict[str, BaseTool]):
-        self.llm = llm_handler.get_llm().bind_tools(list(tools.values()), tool_choice="any")
+    def __init__(self, tool_binding_llm_handler: ToolBindingLLMHandler, chat_history_handler: ChatHistoryHandler, tools: dict[str, BaseTool]):
+        self.tool_binding_llm = tool_binding_llm_handler.get_tool_binding_llm(list(tools.values()))
         self.chat_history_handler = chat_history_handler
         self.tools_descriptions = self._get_tool_descriptions(tools)
         self.tool_mapping = self._get_tool_mapping(tools)
@@ -37,7 +37,7 @@ class ToolRouter:
 
         routing_prompt = PromptFormater.create_chat_prompt_with_history(ConfigPrompts.ROUTING.format(tools_list))
 
-        chain = routing_prompt | self.llm
+        chain = routing_prompt | self.tool_binding_llm
 
         return RunnableWithMessageHistory(
             chain,

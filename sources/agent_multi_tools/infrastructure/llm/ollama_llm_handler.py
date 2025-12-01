@@ -8,11 +8,11 @@ from sources.agent_multi_tools.ports.llm_handler import LLMHandler
 class OllamaLLMHandler(LLMHandler):
     def __init__(
         self,
-        model: str = "llama3.1:8b",
+        model_name: str = "llama3.1:8b",
         temperature: float = 0.7,
         base_url: str = "http://localhost:11434",
     ):
-        self.model_name = model
+        self.model_name = model_name
         self.temperature = temperature
         self.base_url = base_url
 

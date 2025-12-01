@@ -51,8 +51,10 @@ POSTGRES_PASSWORD=my_password
 
 # Ollama
 OLLAMA_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:3b
+OLLAMA_TOOL_BINDING_MODEL=qwen2.5:7b
 OLLAMA_EMBEDDING_MODEL=nomic-embed-text:latest
+OLLAMA_TEMPERATURE=0.7
 ```
 
 ### Services Docker

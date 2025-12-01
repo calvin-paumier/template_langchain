@@ -14,6 +14,7 @@ from sources.agent_multi_tools.config.config_tools import ConfigTools
 from sources.agent_multi_tools.infrastructure.chat_history.in_memory_chat_history_handler import InMemoryChatHistoryHandler
 from sources.agent_multi_tools.infrastructure.database.postgres_databse_handler import PostgresDatabaseHandler
 from sources.agent_multi_tools.infrastructure.embeddings.ollama_embedding_handler import OllamaEmbeddingHandler
+from sources.agent_multi_tools.infrastructure.tool_binding_llm.ollama_tool_binding_llm_handler import OllamaToolBindingLLMHandler
 from sources.agent_multi_tools.infrastructure.interface.chat_handler import ChatHandler
 from sources.agent_multi_tools.infrastructure.llm.ollama_llm_handler import OllamaLLMHandler
 from sources.agent_multi_tools.infrastructure.weather_api.open_meteo_api_handler import OpenMeteoApiHandler
@@ -36,7 +37,11 @@ def initialize_chat_handler():
     )
     llm_handler = OllamaLLMHandler(
         base_url=os.getenv("OLLAMA_URL"),
-        model=os.getenv("OLLAMA_MODEL"),
+        model_name=os.getenv("OLLAMA_MODEL"),
+    )
+    tool_binding_llm_handler = OllamaToolBindingLLMHandler(
+        base_url=os.getenv("OLLAMA_URL"),
+        model_name=os.getenv("OLLAMA_TOOL_BINDING_MODEL"),
     )
     weather_api_handler = OpenMeteoApiHandler()
 
@@ -73,7 +78,10 @@ def initialize_chat_handler():
 
     # Agent
     agent_state_graph = AgentStateGraph(
-        llm_handler=llm_handler, chat_history_handler=chat_history_handler, tools=tools
+        tool_binding_llm_handler=tool_binding_llm_handler,
+        llm_handler=llm_handler,
+        chat_history_handler=chat_history_handler,
+        tools=tools
     ).compile_workflow(state=AgentState, memory=True)
 
     return ChatHandler(agent_state_graph, chat_history_handler)
